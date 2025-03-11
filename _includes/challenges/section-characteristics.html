@@ -4,7 +4,7 @@
         <h2 class="h5 mb-0">
             <button class="btn btn-link" data-toggle="collapse" data-target="#eventDetailsCollapse"
                 aria-expanded="false" aria-controls="eventDetailsCollapse">
-                Event/Bonus Details
+                Challenge Details
             </button>
         </h2>
     </div>
@@ -21,7 +21,18 @@
                 <label for="eventText">Event</label>
                 <input class="form-control" type="text" id="eventText" name="eventText" value=" " oninput="onAnyChange()">
             </div>
-            
+
+            <div class="form-group">
+                <label for="cardPoints">Total Points</label>
+                <select class="form-control" id="cardPoints" name="cardPoints" onchange="onAnyChange()">
+                    <optgroup label="Total Positions">
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                </optgroup>
+                </select>
+            </div>
+
             <div hidden class="form-group">
                 <label for="cardType">Card Type</label>
                 <input class="form-control" type="text" id="cardType" name="cardType" value=" " oninput="onAnyChange()">
