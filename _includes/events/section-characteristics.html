@@ -1,27 +1,33 @@
 <div class="card">
 
-    <div class="card-header" id="mainDetails">
+    <div class="card-header" id="eventDetails">
         <h2 class="h5 mb-0">
-            <button class="btn btn-link" data-toggle="collapse" data-target="#mainDetailsCollapse"
-                aria-expanded="false" aria-controls="mainDetailsCollapse">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#eventDetailsCollapse"
+                aria-expanded="false" aria-controls="eventDetailsCollapse">
                 Event Details
             </button>
         </h2>
     </div>
 
-    <div class="form-group">
-        <label for="cardName">Card name</label>
-        <input class="form-control" type="text" id="cardName" name="cardName" value=" " oninput="onAnyChange()">
-    </div>
+    <div class="collapse" id="eventDetailsCollapse">
+        <div class="card-body">
 
-    <div class="form-group">
-        <label for="eventText">Event</label>
-        <input class="form-control" type="text" id="eventText" name="eventText" value=" " oninput="onAnyChange()">
-    </div>
+            <div class="form-group">
+                <label for="cardName">Card name</label>
+                <input class="form-control" type="text" id="cardName" name="cardName" value=" " oninput="onAnyChange()">
+            </div>
+        
+            <div class="form-group">
+                <label for="eventText">Event</label>
+                <input class="form-control" type="text" id="eventText" name="eventText" value=" " oninput="onAnyChange()">
+            </div>
+        
+            <div hidden class="form-group">
+                <label for="cardType">Card Type</label>
+                <input class="form-control" type="text" id="cardType" name="cardType" value=" " oninput="onAnyChange()">
+            </div>
 
-    <div hidden class="form-group">
-        <label for="cardType">Card Type</label>
-        <input class="form-control" type="text" id="cardType" name="cardType" value=" " oninput="onAnyChange()">
+        </div>
     </div>
 
 </div>
