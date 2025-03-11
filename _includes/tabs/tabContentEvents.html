@@ -1,0 +1,35 @@
+<div class="row mt-3">
+    
+    <div class="col-lg-4" style="max-width: 25%; flex: 0 0 25%;" >
+        <img id="frame" style="display: none;" src="assets/img/events/blitz_bowl_event_card.png">
+        
+        <!--  
+            <img id="art" style="display: none;" src="assets/img/roster/art.png">
+            <img id="star_frame" style="display: none;" src="assets/img/roster/bloodbowl_specialplayer_frame.png">
+        -->
+        <img id="bg1" style="display: none;" src="assets/img/roster/blank.png">
+        <img id="border" style="display: none;" src="assets/img/roster/bloodbowl_border.png">
+
+
+
+        <canvas class="canvas rounded" id="canvas" width="264.567" height="453.543 ">
+            Sorry, your browser doesn't support the &lt;canvas&gt; element.
+        </canvas>
+    </div>
+
+    <div class="col-lg-5 scroll-area-fade">
+        <div class="scroll-area">
+            <div class="accordion">
+
+                {% include events/section-characteristics.html %}
+                {% include events/section-image.html %}
+
+
+            </div>
+
+            {% include events/section-actions.html %}
+
+        </div>
+    </div>
+
+</div>

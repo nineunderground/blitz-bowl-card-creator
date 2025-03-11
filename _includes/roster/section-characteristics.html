@@ -1,0 +1,360 @@
+<div class="card">
+
+    <div class="card-header" id="mainDetails">
+        <h2 class="h5 mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#mainDetailsCollapse"
+                aria-expanded="false" aria-controls="mainDetailsCollapse">
+                Roster Details
+            </button>
+        </h2>
+    </div>
+
+    <div class="collapse" id="mainDetailsCollapse">
+        <div class="card-body">
+
+            <div class="form-group">
+                <label for="teamName">Team Name</label>
+                <input class="form-control" type="text" id="teamName" name="teamName" value=" " oninput="onAnyChange()">
+            </div>
+
+            <div class="form-group">
+                <label for="totalPlayers">Total Players</label>
+                <select class="form-control" id="totalPlayers" name="totalPlayers" onchange="onAnyChange()">
+                    <optgroup label="Total Players">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6" selected>6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </optgroup>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="totalPos">Total Positions</label>
+                <select class="form-control" id="totalPos" name="totalPos" onchange="onAnyChange()">
+                    <optgroup label="Total Positions">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                </optgroup>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="totalReserves">Emergency Reserves</label>
+                <select class="form-control" id="totalReserves" name="totalReserves" onchange="onAnyChange()">
+                    <optgroup label="Emergency Reserves">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </optgroup>
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card-header" id="fightersDetails1">
+        <h2 class="h5 mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#fightersPositions1"
+                aria-expanded="false" aria-controls="fightersPositions1">
+                Roster Position 1
+            </button>
+        </h2>
+    </div>
+
+    <div class="collapse" id="fightersPositions1">
+        <div class="card-body">
+
+            <!-- --------------------------------------------------------- -->
+            <div class="form-group">
+                <label for="position_row_1_name">Position Name</label>
+                <input class="form-control" type="text" id="position_row_1_name" name="position_row_1_name" value=" " oninput="onAnyChange()">
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_1_move">MOVE</label>
+                        <input class="form-control" id="position_row_1_move" min="0" max="9" name="position_row_1_move"
+                            oninput="onAnyChange()" type="number" value="4">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_1_block">BLOCK</label>
+                        <input class="form-control" id="position_row_1_block" min="0" max="8" name="position_row_1_block"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_1_throw">THROW</label>
+                        <input class="form-control" id="position_row_1_throw" min="0" max="6" name="position_row_1_throw"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_1_armour">ARMOUR</label>
+                        <input class="form-control" id="position_row_1_armour" min="0" max="6" name="position_row_1_armour"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="position_row_1_ability">Ability</label>
+                <input class="form-control" type="text" id="position_row_1_ability" name="position_row_1_ability" value=" " oninput="onAnyChange()">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card-header" id="fightersDetails2">
+        <h2 class="h5 mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#fightersPositions2"
+                aria-expanded="false" aria-controls="fightersPositions2">
+                Roster Position 2
+            </button>
+        </h2>
+    </div>
+
+    <div class="collapse" id="fightersPositions2">
+        <div class="card-body">
+
+            <!-- --------------------------------------------------------- -->
+            <div class="form-group">
+                <label for="position_row_2_name">Position Name</label>
+                <input class="form-control" type="text" id="position_row_2_name" name="position_row_2_name" value=" " oninput="onAnyChange()">
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_2_move">MOVE</label>
+                        <input class="form-control" id="position_row_2_move" min="0" max="9" name="position_row_2_move"
+                            oninput="onAnyChange()" type="number" value="4">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_2_block">BLOCK</label>
+                        <input class="form-control" id="position_row_2_block" min="0" max="8" name="position_row_2_block"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_2_throw">THROW</label>
+                        <input class="form-control" id="position_row_2_throw" min="0" max="6" name="position_row_2_throw"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_2_armour">ARMOUR</label>
+                        <input class="form-control" id="position_row_2_armour" min="0" max="6" name="position_row_2_armour"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="position_row_2_ability">Ability</label>
+                <input class="form-control" type="text" id="position_row_2_ability" name="position_row_2_ability" value=" " oninput="onAnyChange()">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card-header" id="fightersDetails3">
+        <h2 class="h5 mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#fightersPositions3"
+                aria-expanded="false" aria-controls="fightersPositions3">
+                Roster Position 3
+            </button>
+        </h2>
+    </div>
+
+    <div class="collapse" id="fightersPositions3">
+        <div class="card-body">
+
+            <!-- --------------------------------------------------------- -->
+            <div class="form-group">
+                <label for="position_row_3_name">Position Name</label>
+                <input class="form-control" type="text" id="position_row_3_name" name="position_row_3_name" value=" " oninput="onAnyChange()">
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_3_move">MOVE</label>
+                        <input class="form-control" id="position_row_3_move" min="0" max="9" name="position_row_3_move"
+                            oninput="onAnyChange()" type="number" value="4">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_3_block">BLOCK</label>
+                        <input class="form-control" id="position_row_3_block" min="0" max="8" name="position_row_3_block"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_3_throw">THROW</label>
+                        <input class="form-control" id="position_row_3_throw" min="0" max="6" name="position_row_3_throw"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_3_armour">ARMOUR</label>
+                        <input class="form-control" id="position_row_3_armour" min="0" max="6" name="position_row_3_armour"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="position_row_3_ability">Ability</label>
+                <input class="form-control" type="text" id="position_row_3_ability" name="position_row_3_ability" value=" " oninput="onAnyChange()">
+            </div>
+
+        </div>
+    </div>    
+
+    <div class="card-header" id="fightersDetails4">
+        <h2 class="h5 mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#fightersPositions4"
+                aria-expanded="false" aria-controls="fightersPositions4">
+                Roster Position 4
+            </button>
+        </h2>
+    </div>
+
+    <div class="collapse" id="fightersPositions4">
+        <div class="card-body">
+
+            <!-- --------------------------------------------------------- -->
+            <div class="form-group">
+                <label for="position_row_4_name">Position Name</label>
+                <input class="form-control" type="text" id="position_row_4_name" name="position_row_4_name" value=" " oninput="onAnyChange()">
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_4_move">MOVE</label>
+                        <input class="form-control" id="position_row_4_move" min="0" max="9" name="position_row_4_move"
+                            oninput="onAnyChange()" type="number" value="4">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_4_block">BLOCK</label>
+                        <input class="form-control" id="position_row_4_block" min="0" max="8" name="position_row_4_block"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_4_throw">THROW</label>
+                        <input class="form-control" id="position_row_4_throw" min="0" max="6" name="position_row_4_throw"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_4_armour">ARMOUR</label>
+                        <input class="form-control" id="position_row_4_armour" min="0" max="6" name="position_row_4_armour"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="position_row_4_ability">Ability</label>
+                <input class="form-control" type="text" id="position_row_4_ability" name="position_row_4_ability" value=" " oninput="onAnyChange()">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card-header" id="fightersDetails5">
+        <h2 class="h5 mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#fightersPositions5"
+                aria-expanded="false" aria-controls="fightersPositions5">
+                Roster Position 5
+            </button>
+        </h2>
+    </div>
+
+    <div class="collapse" id="fightersPositions5">
+        <div class="card-body">
+
+            <!-- --------------------------------------------------------- -->
+            <div class="form-group">
+                <label for="position_row_5_name">Position Name</label>
+                <input class="form-control" type="text" id="position_row_5_name" name="position_row_5_name" value=" " oninput="onAnyChange()">
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_5_move">MOVE</label>
+                        <input class="form-control" id="position_row_5_move" min="0" max="9" name="position_row_5_move"
+                            oninput="onAnyChange()" type="number" value="4">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_5_block">BLOCK</label>
+                        <input class="form-control" id="position_row_5_block" min="0" max="8" name="position_row_5_block"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_5_throw">THROW</label>
+                        <input class="form-control" id="position_row_5_throw" min="0" max="6" name="position_row_5_throw"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="position_row_5_armour">ARMOUR</label>
+                        <input class="form-control" id="position_row_5_armour" min="0" max="6" name="position_row_5_armour"
+                            oninput="onAnyChange()" type="number" value="3">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="position_row_5_ability">Ability</label>
+                <input class="form-control" type="text" id="position_row_5_ability" name="position_row_5_ability" value=" " oninput="onAnyChange()">
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</div>
