@@ -22,10 +22,16 @@
                 <input class="form-control" type="text" id="eventText" name="eventText" value=" " oninput="onAnyChange()">
             </div>
             
-            <div hidden class="form-group">
+            <div class="form-group">
                 <label for="cardType">Card Type</label>
-                <input class="form-control" type="text" id="cardType" name="cardType" value=" " oninput="onAnyChange()">
+                <select class="form-control" id="cardType" name="cardType" onchange="onAnyChange()">
+                    <optgroup label="Card Type">
+                    <option value="BONUS PLAY">BONUS PLAY</option>
+                    <option value="RANDOM EVENT" selected>RANDOM EVENT</option>
+                </optgroup>
+                </select>
             </div>
+
 
         </div>
     </div>

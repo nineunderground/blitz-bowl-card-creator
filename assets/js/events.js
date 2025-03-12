@@ -8,123 +8,6 @@ writeValue = function (ctx, value, pos) {
     ctx.restore();
 }
 
-function printAtWordWrap(context, text, x, y, lineHeight, fitWidth) {
-
-    var lines = text.split('\n');
-    lineNum = 0;
-    for (var i = 0; i < lines.length; i++) {
-        fitWidth = fitWidth || 0;
-        if (fitWidth <= 0) {
-            context.fillText(lines[i], x, y + (lineNum * lineHeight));
-            lineNum++;
-        }
-        var words = lines[i].split(' ');
-        var idx = 1;
-        while (words.length > 0 && idx <= words.length) {
-            var str = words.slice(0, idx).join(' ');
-            var w = context.measureText(str).width;
-            if (w > fitWidth) {
-                if (idx == 1) {
-                    idx = 2;
-                }
-                context.fillText(words.slice(0, idx - 1).join(' '), x, y + (lineNum * lineHeight));
-                lineNum++;
-                words = words.splice(idx - 1);
-                idx = 1;
-            }
-            else {
-                idx++;
-            }
-        }
-        if (idx > 0) {
-            context.fillText(words.join(' '), x, y + (lineNum * lineHeight));
-            lineNum++;
-        }
-
-    }
-
-}
-
-function drawCardTitle(value, xStart, yStart, maxLinesForNormalFont) {
-
-    let context = getContext();
-    context.textAlign = "left";
-    context.textBaseline = "middle";
-    let maxCharactersForThreeLines = 4;
-    let minFontSize = 20;
-    let fontSize = 26;
-    let lineHeight = 40;
-    let fitWidth = 210; // Reduced fitWidth for accommodating 4 lines at smaller font size
-    let textLines = splitWordWrap(context, value, fitWidth);
-
-    if (value.length > maxCharactersForThreeLines) {
-        maxLinesForNormalFont = 4; // Allow 4 lines if there are more than 300 characters
-    }
-
-    // Calculate the font size, etc...
-    if (textLines.length > maxLinesForNormalFont) {
-        let fontReductionStep = 2;
-        while (textLines.length > maxLinesForNormalFont) {
-            fontSize -= fontReductionStep;
-            lineHeight = fontSize * 1.2;
-            fitWidth = 210 / (fontSize / 36); // Adjust fit width proportionally to the font size
-            textLines = splitWordWrap(context, value, fitWidth);
-        }
-        fontSize = Math.max(fontSize, minFontSize);
-        lineHeight = fontSize * 1.2;
-    }
-
-    // Define border color and size
-    const borderColor = 'navy';
-    const borderSize = 2;
-
-    // Draw the border effect
-    textLines.forEach((line, index) => {
-        context.font = `${fontSize}px brothers-regular`;
-        context.fillStyle = borderColor;
-
-        // Draw text at multiple offsets to create border effect
-        for (let i = -borderSize; i <= borderSize; i++) {
-            for (let j = -borderSize; j <= borderSize; j++) {
-                if (i !== 0 || j !== 0) {  // Skip the center position
-                    context.fillText(line, xStart + i, yStart + index * lineHeight + j);
-                }
-            }
-        }
-    });
-
-    // It print the lines...
-    textLines.forEach((line, index) => {
-
-        // let fillStyle = 'white';
-        // context.font = `${fontSize}px brothers-regular`;
-        // context.fillStyle = fillStyle;
-        // context.fillText(line, xStart, yStart + index * lineHeight);
-
-        // ROTATE
-        // getContext().rotate(-6 * Math.PI / 180);
-
-        let fillStyle = 'white';
-        context.font = `${fontSize}px brothers-regular`;
-        context.fillStyle = fillStyle;
-        context.fillText(line, xStart, yStart + index * lineHeight);
-        let textWidth = context.measureText(line).width;
-        let underlineY = yStart + index * lineHeight + 15; // Adjust position slightly
-        
-        context.beginPath();
-        context.moveTo(xStart, underlineY);
-        context.lineTo(xStart + textWidth, underlineY);
-        context.strokeStyle = fillStyle;
-        context.lineWidth = 4; // Adjust thickness if needed
-        context.stroke();
-        // ROTATE
-        // getContext().rotate(-6 * Math.PI / 180);
-
-    });
-
-
-}
-
 function drawTextLetterByLetter(value, xStart, yStart, fontSize, rotateSize, spacingRatio) {
     const ctx = getContext();
     ctx.textAlign = "left";
@@ -167,19 +50,6 @@ function drawText(value, xStart, yStart, fontSize, rotateSize) {
 
 }
 
-function drawAttributeName(value, xStart, yStart, fontSize) {
-
-    getContext().font = `${fontSize}px brothers-regular`;
-    getContext().fillStyle = 'black';
-    getContext().textAlign = "left";
-    getContext().textBaseline = "middle";
-    // getContext().rotate(-6 * Math.PI / 180);
-    writeScaled(value, { x: xStart +4, y: yStart+4 });
-    getContext().fillStyle = 'white';
-    writeScaled(value, { x: xStart, y: yStart });
-    // getContext().rotate(6 * Math.PI / 180);
-
-}
 
 function drawCardEvent(valueToRender, xCoordinateStart, yCoordinateStart) {
 
@@ -221,86 +91,6 @@ function drawCardEvent(valueToRender, xCoordinateStart, yCoordinateStart) {
         context.fillText(line, xCoordinateStart, yCoordinateStart + index * lineHeight);
     });
 }    
-
-function drawCardEventOld(value, xStart, yStart) {
-    
-    let maxLinesForNormalFont = 5;
-
-    let context = getContext();
-    context.textAlign = "left";
-    context.textBaseline = "middle";
-    //let maxCharactersForThreeLines = 180;
-    let maxCharactersForThreeLines = 180;
-    let minFontSize = 16;
-    let fontSize = 20;
-    let lineHeight = 20;
-    let defaultFitWidth = 120;
-    let fitWidth = defaultFitWidth; // Reduced fitWidth for accommodating 4 lines at smaller font size
-    let textLines = splitWordWrap(context, value, fitWidth);
-
-    if (value.length > maxCharactersForThreeLines) {
-        maxLinesForNormalFont = 5; // Allow 4 lines if there are more than 300 characters
-    }
-
-    // Calculate the font size, etc...
-    if (textLines.length > maxLinesForNormalFont) {
-        let fontReductionStep = 2;
-        while (textLines.length > maxLinesForNormalFont) {
-            fontSize -= fontReductionStep;
-            lineHeight = fontSize * 1.2;
-            fitWidth = defaultFitWidth / (fontSize / 20); // Adjust fit width proportionally to the font size
-            textLines = splitWordWrap(context, value, fitWidth);
-        }
-        fontSize = Math.max(fontSize, minFontSize);
-        lineHeight = fontSize * 1.2;
-    }
-
-    // It print the lines...
-    textLines.forEach((line, index) => {
-        let fillStyle = 'black';
-        context.font = `${fontSize}px franklin-gothic-book`;
-        context.fillStyle = fillStyle;
-        context.fillText(line, xStart, yStart + index * lineHeight);
-    });
-}
-
-function drawCardAbilityNew(value, xStart, yStart, maxLinesForNormalFont) {
-    let context = getContext();
-    context.textAlign = "left";
-    context.textBaseline = "middle";
-    let maxCharactersForThreeLines = 20;
-    let minFontSize = 12;
-    let fontSize = 20;
-    let lineHeight = 20;
-    let fitWidth = 120; // Increased from 60 to 120 to allow more text per line
-
-    let textLines = splitWordWrap(context, value, fitWidth);
-
-    if (value.length > maxCharactersForThreeLines) {
-        maxLinesForNormalFont = Math.min(maxLinesForNormalFont, 5); // Cap at 5 lines maximum
-    }
-
-    // Calculate the font size, etc...
-    if (textLines.length > maxLinesForNormalFont) {
-        let fontReductionStep = 1; // Reduced from 2 to 1 for finer control
-        while (textLines.length > maxLinesForNormalFont && fontSize > minFontSize) {
-            fontSize -= fontReductionStep;
-            lineHeight = fontSize * 1.2;
-            fitWidth = 120 / (fontSize / 36); // Adjust fit width proportionally to the font size
-            textLines = splitWordWrap(context, value, fitWidth);
-        }
-        fontSize = Math.max(fontSize, minFontSize);
-        lineHeight = fontSize * 1.2;
-    }
-
-    // Print the lines...
-    textLines.forEach((line, index) => {
-        let fillStyle = 'black';
-        context.font = `${fontSize}px franklin-gothic-book`;
-        context.fillStyle = fillStyle;
-        context.fillText(line, xStart, yStart + index * lineHeight);
-    });
-}
 
 function splitWordWrap(context, text, fitWidth) {
     const words = text.split(' ');
@@ -425,42 +215,6 @@ function getSelectedRunemark(radioDiv) {
     return null;
 }
 
-function setSelectedRunemark(radioDiv, runemark, radioGroupName, bgColor) {
-    // uncheck all
-    {
-        var checked = $(radioDiv).find('input:checked');
-        for (var i = 0; i < checked.length; i++) {
-            checked[i].checked = false;
-        }
-        var icons = $(radioDiv).find('img');
-        for (var i = 0; i < icons.length; i++) {
-            icons[i].style.backgroundColor = bgColor;
-        }
-    }
-
-    if (runemark != null) {
-        var queryString = "img[src='" + runemark + "']";
-        var img = $(radioDiv).find(queryString);
-        if (img.length > 0) {
-            var radioButton = $(img[0].parentNode.parentNode).find("input")[0];
-            radioButton.checked = true;
-            // img[0].style.backgroundColor = "tomato";
-            img[0].style.backgroundColor = "#00bc8c";
-        }
-        else {
-            var newDiv =
-                addToImageRadioSelector(
-                    runemark,
-                    radioDiv,
-                    radioGroupName,
-                    bgColor);
-            // $(newDiv).find("img")[0].style.backgroundColor = "tomato";
-            $(newDiv).find("img")[0].style.backgroundColor = "#00bc8c";
-            $(newDiv).find("input")[0].checked = true;
-        }
-    }
-}
-
 function drawImage(scaledPosition, scaledSize, image) {
     if (image != null) {
         if (image.complete) {
@@ -549,47 +303,7 @@ function readControls() {
     data.imageProperties = getModelImageProperties();
     data.cardName = document.getElementById("cardName").value;
     data.eventText = document.getElementById("eventText").value;
-    data.cardType = "RANDOM EVENT";
-
-    // data.teamName = document.getElementById("teamName").value;
-    // data.totalPlayers = document.getElementById("totalPlayers").value;
-    // data.totalPos = document.getElementById("totalPos").value;
-    // data.totalReserves = document.getElementById("totalReserves").value;
-
-    // data.position_row_1_name = document.getElementById("position_row_1_name").value;
-    // data.position_row_1_move = document.getElementById("position_row_1_move").value;
-    // data.position_row_1_block = document.getElementById("position_row_1_block").value;
-    // data.position_row_1_throw = document.getElementById("position_row_1_throw").value;
-    // data.position_row_1_armour = document.getElementById("position_row_1_armour").value;
-    // data.position_row_1_ability = document.getElementById("position_row_1_ability").value;
-
-    // data.position_row_2_name = document.getElementById("position_row_2_name").value;
-    // data.position_row_2_move = document.getElementById("position_row_2_move").value;
-    // data.position_row_2_block = document.getElementById("position_row_2_block").value;
-    // data.position_row_2_throw = document.getElementById("position_row_2_throw").value;
-    // data.position_row_2_armour = document.getElementById("position_row_2_armour").value;
-    // data.position_row_2_ability = document.getElementById("position_row_2_ability").value;
-
-    // data.position_row_3_name = document.getElementById("position_row_3_name").value;
-    // data.position_row_3_move = document.getElementById("position_row_3_move").value;
-    // data.position_row_3_block = document.getElementById("position_row_3_block").value;
-    // data.position_row_3_throw = document.getElementById("position_row_3_throw").value;
-    // data.position_row_3_armour = document.getElementById("position_row_3_armour").value;
-    // data.position_row_3_ability = document.getElementById("position_row_3_ability").value;
-
-    // data.position_row_4_name = document.getElementById("position_row_4_name").value;
-    // data.position_row_4_move = document.getElementById("position_row_4_move").value;
-    // data.position_row_4_block = document.getElementById("position_row_4_block").value;
-    // data.position_row_4_throw = document.getElementById("position_row_4_throw").value;
-    // data.position_row_4_armour = document.getElementById("position_row_4_armour").value;
-    // data.position_row_4_ability = document.getElementById("position_row_4_ability").value;
-
-    // data.position_row_5_name = document.getElementById("position_row_5_name").value;
-    // data.position_row_5_move = document.getElementById("position_row_5_move").value;
-    // data.position_row_5_block = document.getElementById("position_row_5_block").value;
-    // data.position_row_5_throw = document.getElementById("position_row_5_throw").value;
-    // data.position_row_5_armour = document.getElementById("position_row_5_armour").value;
-    // data.position_row_5_ability = document.getElementById("position_row_5_ability").value;
+    data.cardType = document.getElementById("cardType").value;
 
     return data;
 }
@@ -598,9 +312,9 @@ function drawCardDetails(fighterData){
     
     console.log('drawCardDetails...')
     // Depending on combobox, select the image filename
-    var frameToPick = 'frame';
-    getContext().drawImage(document.getElementById(frameToPick), 0, 0, getCanvas().width, getCanvas().height);
-    getContext().drawImage(document.getElementById('border'), 0, 0, getCanvas().width, getCanvas().height);
+    getContext().drawImage(document.getElementById('frame'), 0, 0, getCanvas().width, getCanvas().height);
+    // If checkbox is enabled
+    // getContext().drawImage(document.getElementById('border'), 0, 0, getCanvas().width, getCanvas().height);
 
     totalHyphens = fighterData.cardName.length - 3;
     hyphenValue = "";
@@ -619,50 +333,22 @@ render = function (fighterData) {
     // console.log("Render:");
     // console.log(fighterData);
     // First the textured background
+    
     getContext().drawImage(document.getElementById('bg1'), 0, 0, getCanvas().width, getCanvas().height);
-
     if (fighterData.imageUrl) {
         var image = new Image();
         image.onload = function () {
-        var position = scalePixelPosition({ x: 100 + fighterData.imageProperties.offsetX, y: fighterData.imageProperties.offsetY });
-        var scale = fighterData.imageProperties.scalePercent / 100.0;
-        var width = image.width * scale;
-        var height = image.height * scale;
-        getContext().drawImage(image, position.x, position.y, width, height);
-        // TODO: Uncomment???
-        //drawCardDetails(fighterData);
+            getContext().reset();
+            var position = scalePixelPosition({ x: 100 + fighterData.imageProperties.offsetX, y: fighterData.imageProperties.offsetY });
+            var scale = fighterData.imageProperties.scalePercent / 100.0;
+            var width = image.width * scale;
+            var height = image.height * scale;
+            getContext().drawImage(image, position.x, position.y, width, height);
+            drawCardDetails(fighterData);
         };
-    image.src = fighterData.imageUrl;
+        image.src = fighterData.imageUrl;
     }
-    // next the frame elements
-
     drawCardDetails(fighterData);
-}
-
-function drawNumber(num,x, y, plus){
-
-    if(num<1 || num>11 ) {
-        num = '-';
-        plus = false;
-    }
-    if(num>9){
-        getContext().drawImage(document.getElementById('sf1'), x-15, y, 35, 70);
-        x = x + 35-15;
-        num = num -10;
-    }
-    elementId = 'sf'+num;
-
-    if(num == 1) {
-        width = 35;
-        x = x+9;
-    } else {
-        width = 53;
-    }
-
-    getContext().drawImage(document.getElementById(elementId), x, y, width, 70);
-    if (plus){
-        getContext().drawImage(document.getElementById('sf+'), x+width, y, 39, 70);
-    }
 }
 
 async function writeControls(fighterData) {
@@ -691,47 +377,6 @@ async function writeControls(fighterData) {
     $("#eventText")[0].value = fighterData.eventText;
     $("#cardType")[0].value = fighterData.cardType;
 
-
-    // $("#teamName")[0].value = fighterData.teamName;
-    // $("#totalPlayers")[0].value = fighterData.totalPlayers;
-    // $("#totalPos")[0].value = fighterData.totalPos;
-    // $("#totalReserves")[0].value = fighterData.totalReserves;
-
-    // $("#position_row_1_name")[0].value = fighterData.position_row_1_name;
-    // $("#position_row_1_move")[0].value = fighterData.position_row_1_move;
-    // $("#position_row_1_block")[0].value = fighterData.position_row_1_block;
-    // $("#position_row_1_throw")[0].value = fighterData.position_row_1_throw;
-    // $("#position_row_1_armour")[0].value = fighterData.position_row_1_armour;
-    // $("#position_row_1_ability")[0].value = fighterData.position_row_1_ability;
-
-    // $("#position_row_2_name")[0].value = fighterData.position_row_2_name;
-    // $("#position_row_2_move")[0].value = fighterData.position_row_2_move;
-    // $("#position_row_2_block")[0].value = fighterData.position_row_2_block;
-    // $("#position_row_2_throw")[0].value = fighterData.position_row_2_throw;
-    // $("#position_row_2_armour")[0].value = fighterData.position_row_2_armour;
-    // $("#position_row_2_ability")[0].value = fighterData.position_row_2_ability;
-
-    // $("#position_row_3_name")[0].value = fighterData.position_row_3_name;
-    // $("#position_row_3_move")[0].value = fighterData.position_row_3_move;
-    // $("#position_row_3_block")[0].value = fighterData.position_row_3_block;
-    // $("#position_row_3_throw")[0].value = fighterData.position_row_3_throw;
-    // $("#position_row_3_armour")[0].value = fighterData.position_row_3_armour;
-    // $("#position_row_3_ability")[0].value = fighterData.position_row_3_ability;
-
-    // $("#position_row_4_name")[0].value = fighterData.position_row_4_name;
-    // $("#position_row_4_move")[0].value = fighterData.position_row_4_move;
-    // $("#position_row_4_block")[0].value = fighterData.position_row_4_block;
-    // $("#position_row_4_throw")[0].value = fighterData.position_row_4_throw;
-    // $("#position_row_4_armour")[0].value = fighterData.position_row_4_armour;
-    // $("#position_row_4_ability")[0].value = fighterData.position_row_4_ability;
-
-    // $("#position_row_5_name")[0].value = fighterData.position_row_5_name;
-    // $("#position_row_5_move")[0].value = fighterData.position_row_5_move;
-    // $("#position_row_5_block")[0].value = fighterData.position_row_5_block;
-    // $("#position_row_5_throw")[0].value = fighterData.position_row_5_throw;
-    // $("#position_row_5_armour")[0].value = fighterData.position_row_5_armour;
-    // $("#position_row_5_ability")[0].value = fighterData.position_row_5_ability;    
-
     // render the updated info
     render(fighterData);
 }
@@ -744,45 +389,6 @@ function defaultData() {
     fighterData.cardName = "BANANA SKINS";
     fighterData.eventText = "Each Coach chooses one Standing (but not Marked) Opposition Player, if any. The chosen Player becomes Prone (do not roll an Armor Check). If they were holding a ball, it will Bounce";
     fighterData.cardType = "RANDOM EVENT";
-
-    // fighterData.totalPlayers = "6";
-    // fighterData.totalPos = 4;
-    // fighterData.totalReserves = 5;
-
-    // fighterData.position_row_1_name = "EAGLE WARRIOR";
-    // fighterData.position_row_1_move = 6;
-    // fighterData.position_row_1_block = 1;
-    // fighterData.position_row_1_throw = 4;
-    // fighterData.position_row_1_armour = 4;
-    // fighterData.position_row_1_ability = ""
-    
-    // fighterData.position_row_2_name = "PYTHON THROWER";
-    // fighterData.position_row_2_move = "6";
-    // fighterData.position_row_2_block = "1";
-    // fighterData.position_row_2_throw = "3";
-    // fighterData.position_row_2_armour = "4";
-    // fighterData.position_row_2_ability = "Handling Skills: Whenever this player is moved into a square containing the ball, they pick it up, as though they were making a Run action";
-
-    // fighterData.position_row_3_name = "PIRANHA BLITZER";
-    // fighterData.position_row_3_move = "7";
-    // fighterData.position_row_3_block = "1";
-    // fighterData.position_row_3_throw = "4";
-    // fighterData.position_row_3_armour = "4";
-    // fighterData.position_row_3_ability = "Offensive Specialist: Whenever this player makes a Block action, you can choose to re-roll the block dice";
-
-    // fighterData.position_row_4_name = "JAGUAR BLOCKER";
-    // fighterData.position_row_4_move = "6";
-    // fighterData.position_row_4_block = "2";
-    // fighterData.position_row_4_throw = "5";
-    // fighterData.position_row_4_armour = "3";
-    // fighterData.position_row_4_ability = "";
-
-    // fighterData.position_row_5_name = "";
-    // fighterData.position_row_5_move = "";
-    // fighterData.position_row_5_block = "";
-    // fighterData.position_row_5_throw = "";
-    // fighterData.position_row_5_armour = "";
-    // fighterData.position_row_5_ability = "";
 
     return fighterData;
 }

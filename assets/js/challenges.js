@@ -518,10 +518,10 @@ function readControls() {
 function drawCardDetails(fighterData){
     
     console.log('drawCardDetails...')
-    // Depending on combobox, select the image filename
-    var frameToPick = 'frame';
-    getContext().drawImage(document.getElementById(frameToPick), 0, 0, getCanvas().width, getCanvas().height);
-    getContext().drawImage(document.getElementById('border'), 0, 0, getCanvas().width, getCanvas().height);
+    getContext().drawImage(document.getElementById('frame'), 0, 0, getCanvas().width, getCanvas().height);
+    
+    // If checkbox is enabled
+    // getContext().drawImage(document.getElementById('border'), 0, 0, getCanvas().width, getCanvas().height);
 
     totalHyphens = fighterData.cardName.length - 3;
     hyphenValue = "";
@@ -549,13 +549,13 @@ render = function (fighterData) {
     if (fighterData.imageUrl) {
         var image = new Image();
         image.onload = function () {
-        var position = scalePixelPosition({ x: 100 + fighterData.imageProperties.offsetX, y: fighterData.imageProperties.offsetY });
-        var scale = fighterData.imageProperties.scalePercent / 100.0;
-        var width = image.width * scale;
-        var height = image.height * scale;
-        getContext().drawImage(image, position.x, position.y, width, height);
-        // TODO: Uncomment???
-        //drawCardDetails(fighterData);
+            getContext().reset();
+            var position = scalePixelPosition({ x: 100 + fighterData.imageProperties.offsetX, y: fighterData.imageProperties.offsetY });
+            var scale = fighterData.imageProperties.scalePercent / 100.0;
+            var width = image.width * scale;
+            var height = image.height * scale;
+            getContext().drawImage(image, position.x, position.y, width, height);
+            drawCardDetails(fighterData);
         };
     image.src = fighterData.imageUrl;
     }
