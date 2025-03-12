@@ -663,7 +663,7 @@ async function writeControls(fighterData) {
 function defaultFighterData() {
     var fighterData = new Object;
     fighterData.name = "BloodBowl_Card";
-    fighterData.teamName = "Amazon Team";
+    fighterData.teamName = "AMAZON TEAM";
 
     fighterData.imageProperties = getDefaultModelImageProperties();
     fighterData.totalPlayers = "6";

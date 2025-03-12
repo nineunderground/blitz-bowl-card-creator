@@ -667,10 +667,10 @@ function defaultData() {
     fighterData.name = "BloodBowl_Card_event";
     fighterData.imageProperties = getDefaultModelImageProperties();
 
-    fighterData.cardName = "BANANA SKINS";
-    fighterData.eventText = "Each Coach chooses one Standing (but not Marked) Opposition Player, if any. The chosen Player becomes Prone (do not roll an Armor Check). If they were holding a ball, it will Bounce";
+    fighterData.cardName = "Get The Ball!";
+    fighterData.eventText = "Claim this card if a Player from your team took possession of a ball, and your team did not have possession of that ball at the start of your turn.";
     fighterData.cardType = "CHALLENGE CARD";
-    fighterData.cardPoints = "2";
+    fighterData.cardPoints = "1";
 
     // fighterData.totalPlayers = "6";
     // fighterData.totalPos = 4;
