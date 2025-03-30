@@ -521,7 +521,7 @@ function drawCardDetails(fighterData){
     getContext().drawImage(document.getElementById('frame'), 0, 0, getCanvas().width, getCanvas().height);
     
     // If checkbox is enabled
-    // getContext().drawImage(document.getElementById('border'), 0, 0, getCanvas().width, getCanvas().height);
+    getContext().drawImage(document.getElementById('border'), 0, 0, getCanvas().width, getCanvas().height);
 
     totalHyphens = fighterData.cardName.length - 3;
     hyphenValue = "";
@@ -529,9 +529,10 @@ function drawCardDetails(fighterData){
         hyphenValue += "─";
     }
 
-    drawTextLetterByLetter(fighterData.cardName, 60, 120, 120, 3, 1.5);
+    // TODO: Correct values on x axis
+    drawTextLetterByLetter(fighterData.cardName, 65, 130, 120, 2, 1.5);
     drawText(hyphenValue, 210, 180, 120, 4);
-    drawCardEvent(fighterData.eventText, 8, 300);
+    drawCardEvent(fighterData.eventText, 15, 300);
     drawText(fighterData.cardType, 900, 1240, 80, 3);
     drawText(fighterData.cardPoints, 50, 1175, 100, 3);
 

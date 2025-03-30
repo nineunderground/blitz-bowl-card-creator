@@ -314,7 +314,7 @@ function drawCardDetails(fighterData){
     // Depending on combobox, select the image filename
     getContext().drawImage(document.getElementById('frame'), 0, 0, getCanvas().width, getCanvas().height);
     // If checkbox is enabled
-    // getContext().drawImage(document.getElementById('border'), 0, 0, getCanvas().width, getCanvas().height);
+    getContext().drawImage(document.getElementById('border'), 0, 0, getCanvas().width, getCanvas().height);
 
     totalHyphens = fighterData.cardName.length - 3;
     hyphenValue = "";

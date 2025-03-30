@@ -104,17 +104,31 @@ function drawCardPlayerName(value, xStart, yStart, maxLinesForNormalFont) {
 }
 
 function drawReserves(value, xStart, yStart, fontSize) {
+ 
+    reservesLine = 'EMERGENCY RESERVES: ' + value;
+ 
+    //let fontSize = 35;
+    let context = getContext();
+    context.textAlign = "left";
+    context.textBaseline = "middle";
 
-    reservesLine = 'EMERGENCY RESERVES: ' + value
-    getContext().font = `${fontSize}px brothers-regular`;
-    getContext().fillStyle = 'black';
-    getContext().textAlign = "left";
-    getContext().textBaseline = "middle";
-    // getContext().rotate(-6 * Math.PI / 180);
-    writeScaled(reservesLine, { x: xStart +4, y: yStart+4 });
-    getContext().fillStyle = 'white';
-    writeScaled(reservesLine, { x: xStart, y: yStart });
-    // getContext().rotate(6 * Math.PI / 180);
+    // Draw the border effect
+    context.font = `${fontSize}px brothers-regular`;
+    context.fillStyle = 'navy';
+    const borderSize = 2;
+    
+    // Draw text at multiple offsets to create border effect
+    for (let i = -borderSize; i <= borderSize; i++) {
+        for (let j = -borderSize; j <= borderSize; j++) {
+            if (i !== 0 || j !== 0) {  // Skip the center position
+                context.fillText(reservesLine, xStart + i, yStart + j);
+            }
+        }
+    }
+
+    // It print the lines...
+    context.fillStyle = 'white';
+    context.fillText(reservesLine, xStart, yStart);
 
 }
 
@@ -509,7 +523,7 @@ function drawCardDetails(fighterData){
 
     // HEADER
     drawTeamName(fighterData.teamName);
-    drawNumber(fighterData.totalPlayers, 1326, 18, false);
+    drawTotalPlayers(fighterData.totalPlayers, 1305, 80, 90);
 
     // Attribute names
     drawAttributeName('POSITION', 35, 175, 35);
@@ -536,13 +550,13 @@ function drawCardDetails(fighterData){
         // AV (Armour)
         drawNumber(fighterData[`position_row_${i}_armour`], 705, yPos, true);   
         // Ability
-        drawCardAbility(fighterData[`position_row_${i}_ability`], 840, yPos, 4);
+        drawCardAbility(fighterData[`position_row_${i}_ability`], 840, yPos-15, 4);
     }
 
     // FOOTER
-    drawReserves(fighterData.totalReserves, 1350, 1270, 35);
-
-}
+    drawReserves(fighterData.totalReserves, 1050, 1090, 28); 
+    
+    }
 
 render = function (fighterData) {
     // console.log("Render:");
@@ -566,6 +580,50 @@ render = function (fighterData) {
     // next the frame elements
 
     drawCardDetails(fighterData);
+}
+
+function drawTotalPlayers(value, xStart, yStart, fontSize){
+ 
+    if(value == 2) {
+        xStart = xStart + 5;
+    }
+    if(value == 3) {
+        xStart = xStart + 5;
+    }
+    if(value == 7) {
+        xStart = xStart + 8;
+    }
+    
+    // drawTotalPlayers(10, 1298, 80, 70);
+    // drawTotalPlayers(fighterData.totalPlayers, 1305, 80, 90);
+
+    if(value>9){
+        fontSize = fontSize-20;
+        xStart = xStart - 7;
+    }
+
+    let context = getContext();
+    context.textAlign = "left";
+    context.textBaseline = "middle";
+
+    // Draw the border effect
+    context.font = `${fontSize}px brothers-regular`;
+    context.fillStyle = 'navy';
+    const borderSize = 2;
+    
+    // Draw text at multiple offsets to create border effect
+    for (let i = -borderSize; i <= borderSize; i++) {
+        for (let j = -borderSize; j <= borderSize; j++) {
+            if (i !== 0 || j !== 0) {  // Skip the center position
+                context.fillText(value, xStart + i, yStart + j);
+            }
+        }
+    }
+
+    // It print the lines...
+    context.fillStyle = 'white';
+    context.fillText(value, xStart, yStart); 
+
 }
 
 function drawNumber(num,x, y, plus){
@@ -668,7 +726,7 @@ function defaultFighterData() {
     fighterData.imageProperties = getDefaultModelImageProperties();
     fighterData.totalPlayers = "6";
     fighterData.totalPos = 4;
-    fighterData.totalReserves = 5;
+    fighterData.totalReserves = 4;
 
     fighterData.position_row_1_name = "EAGLE WARRIOR";
     fighterData.position_row_1_move = 6;
@@ -682,21 +740,21 @@ function defaultFighterData() {
     fighterData.position_row_2_block = "1";
     fighterData.position_row_2_throw = "3";
     fighterData.position_row_2_armour = "4";
-    fighterData.position_row_2_ability = "Handling Skills: Whenever this player is moved into a square containing the ball, they pick it up, as though they were making a Run action";
+    fighterData.position_row_2_ability = "Handling Skills: Whenever this player is moved into a square containing the ball, they pick it up, as though they were making a Run action.";
 
     fighterData.position_row_3_name = "PIRANHA BLITZER";
     fighterData.position_row_3_move = "7";
     fighterData.position_row_3_block = "1";
     fighterData.position_row_3_throw = "4";
     fighterData.position_row_3_armour = "4";
-    fighterData.position_row_3_ability = "Offensive Specialist: Whenever this player makes a Block action, you can choose to re-roll the block dice";
+    fighterData.position_row_3_ability = "Offensive Specialist: Whenever this player makes a Block action, you can choose to re-roll the block dice.";
 
     fighterData.position_row_4_name = "JAGUAR BLOCKER";
     fighterData.position_row_4_move = "6";
     fighterData.position_row_4_block = "2";
-    fighterData.position_row_4_throw = "5";
+    fighterData.position_row_4_throw = "4";
     fighterData.position_row_4_armour = "3";
-    fighterData.position_row_4_ability = "";
+    fighterData.position_row_4_ability = "Opposition Players adjcanet to this Player can never Assist a Block Action.";
 
     fighterData.position_row_5_name = "";
     fighterData.position_row_5_move = "";
