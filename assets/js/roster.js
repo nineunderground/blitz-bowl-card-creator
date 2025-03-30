@@ -147,6 +147,56 @@ function drawAttributeName(value, xStart, yStart, fontSize) {
 }
 
 function drawCardAbility(value, xStart, yStart, maxLinesForNormalFont) {
+    let context = getContext();
+    context.textAlign = "left";
+    context.textBaseline = "middle";
+    let maxCharactersForThreeLines = 20;
+    let minFontSize = 25;
+    let fontSize = 36;
+    let lineHeight = 35;
+    let fitWidth = 600;
+    let textLines = splitWordWrap(context, value, fitWidth);
+
+    if (value.length > maxCharactersForThreeLines) {
+        maxLinesForNormalFont = 4;
+    }
+
+    if (textLines.length > maxLinesForNormalFont) {
+        let fontReductionStep = 2;
+        while (textLines.length > maxLinesForNormalFont) {
+            fontSize -= fontReductionStep;
+            lineHeight = fontSize * 1.2;
+            fitWidth = 600 / (fontSize / 36);
+            textLines = splitWordWrap(context, value, fitWidth);
+        }
+        fontSize = Math.max(fontSize, minFontSize);
+        lineHeight = fontSize * 1.2;
+    }
+
+    textLines.forEach((line, index) => {
+        let fillStyle = 'black';
+        context.font = `${fontSize}px franklin-gothic-book`;
+        context.fillStyle = fillStyle;
+
+        let colonIndex = line.indexOf(":");
+        if (colonIndex !== -1) {
+            let boldText = line.substring(0, colonIndex + 1);
+            let normalText = line.substring(colonIndex + 1);
+            
+            context.font = `bold ${fontSize}px franklin-gothic-book`;
+            context.fillText(boldText, xStart, yStart + index * lineHeight);
+            
+            let boldWidth = context.measureText(boldText).width;
+            context.font = `${fontSize}px franklin-gothic-book`;
+            context.fillText(normalText, xStart + boldWidth, yStart + index * lineHeight);
+        } else {
+            context.fillText(line, xStart, yStart + index * lineHeight);
+        }
+    });
+}
+
+
+function drawCardAbilityOld(value, xStart, yStart, maxLinesForNormalFont) {
     
     let context = getContext();
     context.textAlign = "left";
@@ -523,7 +573,7 @@ function drawCardDetails(fighterData){
 
     // HEADER
     drawTeamName(fighterData.teamName);
-    drawTotalPlayers(fighterData.totalPlayers, 1305, 80, 90);
+    drawTotalPlayers(fighterData.totalPlayers, 1314, 80, 90);
 
     // Attribute names
     drawAttributeName('POSITION', 35, 175, 35);
@@ -593,9 +643,6 @@ function drawTotalPlayers(value, xStart, yStart, fontSize){
     if(value == 7) {
         xStart = xStart + 8;
     }
-    
-    // drawTotalPlayers(10, 1298, 80, 70);
-    // drawTotalPlayers(fighterData.totalPlayers, 1305, 80, 90);
 
     if(value>9){
         fontSize = fontSize-20;
